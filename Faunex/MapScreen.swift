@@ -9,7 +9,7 @@ struct MapScreen: View {
     )
   )
   var body: some View {
-    Map(position: $position)
+    Map(position: $position)	
       .ignoresSafeArea()
   }
 }

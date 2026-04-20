@@ -195,6 +195,10 @@
 			);
 			mainGroup = 3FB8441E2F6D749400486125;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3FC0DF322F963835008A4109 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
+				3FC0DF332F963981008A4109 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3FB844282F6D749400486125 /* Products */;
 			projectDirPath = "";
@@ -570,6 +574,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3FC0DF322F963835008A4109 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
+		3FC0DF332F963981008A4109 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SvenTiigi/YouTubePlayerKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 3FB8441F2F6D749400486125 /* Project object */;
 }

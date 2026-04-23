@@ -23,7 +23,7 @@ struct ContentView: View {
             }
             
             Tab("Live", systemImage: "video") {
-                Text("Live")
+                QuizScreen()
             }
             
             Tab("Settings", systemImage: "gear") {

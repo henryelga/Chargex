@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		3F7E2E352F9A83E0004DB6A2 /* QuizScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E2E342F9A83D9004DB6A2 /* QuizScreen.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		3FB844352F6D749600486125 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -28,7 +24,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3F7E2E342F9A83D9004DB6A2 /* QuizScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizScreen.swift; sourceTree = "<group>"; };
 		3FB844272F6D749400486125 /* Faunex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Faunex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FB844342F6D749600486125 /* FaunexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FaunexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FB8443E2F6D749600486125 /* FaunexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FaunexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,7 +75,6 @@
 		3FB8441E2F6D749400486125 = {
 			isa = PBXGroup;
 			children = (
-				3F7E2E342F9A83D9004DB6A2 /* QuizScreen.swift */,
 				3FB844292F6D749400486125 /* Faunex */,
 				3FB844372F6D749600486125 /* FaunexTests */,
 				3FB844412F6D749600486125 /* FaunexUITests */,
@@ -242,7 +236,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F7E2E352F9A83E0004DB6A2 /* QuizScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

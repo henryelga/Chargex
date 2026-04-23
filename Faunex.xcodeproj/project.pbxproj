@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3F7E2E032F9A61D3004DB6A2 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7E2E022F9A61D3004DB6A2 /* YouTubePlayerKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		3FB844352F6D749600486125 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -29,9 +33,22 @@
 		3FB8443E2F6D749600486125 /* FaunexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FaunexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3F7E2E092F9A67DA004DB6A2 /* Exceptions for "Faunex" folder in "Faunex" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3FB844262F6D749400486125 /* Faunex */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3FB844292F6D749400486125 /* Faunex */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3F7E2E092F9A67DA004DB6A2 /* Exceptions for "Faunex" folder in "Faunex" target */,
+			);
 			path = Faunex;
 			sourceTree = "<group>";
 		};
@@ -52,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F7E2E032F9A61D3004DB6A2 /* YouTubePlayerKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +90,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F7E2E012F9A61D3004DB6A2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3FB8441E2F6D749400486125 = {
 			isa = PBXGroup;
 			children = (
 				3FB844292F6D749400486125 /* Faunex */,
 				3FB844372F6D749600486125 /* FaunexTests */,
 				3FB844412F6D749600486125 /* FaunexUITests */,
+				3F7E2E012F9A61D3004DB6A2 /* Frameworks */,
 				3FB844282F6D749400486125 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +138,7 @@
 			);
 			name = Faunex;
 			packageProductDependencies = (
+				3F7E2E022F9A61D3004DB6A2 /* YouTubePlayerKit */,
 			);
 			productName = Faunex;
 			productReference = 3FB844272F6D749400486125 /* Faunex.app */;
@@ -401,6 +428,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Faunex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -432,6 +460,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Faunex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -593,6 +622,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3F7E2E022F9A61D3004DB6A2 /* YouTubePlayerKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3FC0DF332F963981008A4109 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
+			productName = YouTubePlayerKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3FB8441F2F6D749400486125 /* Project object */;
 }

@@ -1,13 +1,3 @@
-//
-//  QuizScreen.swift
-//  Faunex
-//
-//  Created by Student on 23/04/2026.
-//
-
-// Reference: https://developer.apple.com/documentation/swiftui/state
-// Reference: https://developer.apple.com/documentation/swiftui/view
-
 struct Question {
     let text: String
     let answers: [String]

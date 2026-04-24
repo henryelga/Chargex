@@ -1,10 +1,3 @@
-//
-//  SettingsScreen.swift
-//  Faunex
-//
-//  Created by Student on 23/04/2026.
-//
-
 import SwiftUI
 
 struct SettingsScreen: View {

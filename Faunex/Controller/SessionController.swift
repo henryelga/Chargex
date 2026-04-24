@@ -1,5 +1,5 @@
 //
-//  SessionStore.swift
+//  SessionController.swift
 //  Faunex
 //
 //  Created by Student on 24/04/2026.
@@ -8,7 +8,8 @@
 import Foundation
 import Combine
 
-class SessionStore: ObservableObject {
+class SessionController: ObservableObject {
+    
     @Published var sessions: [ChargeSession] = []
     
     func addSession(stationName: String, latitude: Double, longitude: Double) {
@@ -32,17 +33,27 @@ class SessionStore: ObservableObject {
         }.count
     }
     
-    var chargesPerDay: [Date: Int] {
+    var co2Saved: Double {
+        Double(sessions.count) * 2.6
+    }
+    
+    var weeklyChartData: [(Date, Int)] {
         let calendar = Calendar.current
         
-        return Dictionary(grouping: sessions) {
+        let grouped = Dictionary(grouping: sessions) {
             calendar.startOfDay(for: $0.date)
-        }.mapValues { $0.count }
+        }
+        
+        return grouped
+            .map { ($0.key, $0.value.count) }
+            .sorted { $0.0 < $1.0 }
     }
     
     var mostUsedStations: [(String, Int)] {
         let grouped = Dictionary(grouping: sessions) { $0.stationName }
-        return grouped.map { ($0.key, $0.value.count) }
+        
+        return grouped
+            .map { ($0.key, $0.value.count) }
             .sorted { $0.1 > $1.1 }
     }
 }

@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @AppStorage("isDarkMode") private var isDarkMode = false
+    @AppStorage("isLargeText") private var isLargeText = false
+    
     var body: some View {
         TabView {
             Tab("Home", systemImage: "house") {
@@ -19,13 +23,15 @@ struct ContentView: View {
             }
             
             Tab("Live", systemImage: "video") {
-                Text("Live")
+                QuizScreen()
             }
             
             Tab("Settings", systemImage: "gear") {
-                Text("Settings")
+                SettingsScreen()
             }
         }
+        .preferredColorScheme(isDarkMode ? .dark : .light)
+        .dynamicTypeSize(isLargeText ? .xLarge : .medium)
     }
 }
 

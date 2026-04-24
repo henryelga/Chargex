@@ -26,8 +26,8 @@ struct ContentView: View {
                     .environmentObject(sessionStore)
             }
             
-            Tab("Live", systemImage: "video") {
-                QuizScreen()
+            Tab("Saved", systemImage: "bookmark") {
+                SavedView()
             }
             
             Tab("Settings", systemImage: "gear") {

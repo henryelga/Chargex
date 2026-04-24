@@ -1,8 +1,31 @@
 import SwiftUI
+import SwiftData
 
 struct StationDetailView: View {
     
+    @Environment(\.modelContext) private var context
+    @Query private var saved: [SavedStation]
+    
     let station: ChargingStation
+    
+    private func isSaved(_ station: ChargingStation) -> Bool {
+        saved.contains { $0.id == station.ref }
+    }
+    
+    private func toggleSaved() {
+        guard let id = station.ref else { return }
+        
+        if let existing = saved.first(where: { $0.id == id }) {
+            context.delete(existing)
+        } else {
+            let newSaved = SavedStation(
+                id: id,
+                name: station.name,
+                address: station.address
+            )
+            context.insert(newSaved)
+        }
+    }
     
     var body: some View {
         ScrollView {
@@ -23,6 +46,16 @@ struct StationDetailView: View {
                     Label(operatorName, systemImage: "building.2.fill")
                         .foregroundColor(.secondary)
                 }
+                
+                Button {
+                    toggleSaved()
+                } label: {
+                    Label(
+                        isSaved(station) ? "Saved" : "Save",
+                        systemImage: isSaved(station) ? "bookmark.fill" : "bookmark"
+                    )
+                }
+                .buttonStyle(.borderedProminent)
                 
                 Divider()
                 

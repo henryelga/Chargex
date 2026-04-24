@@ -11,15 +11,19 @@ struct ContentView: View {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
     @AppStorage("isLargeText") private var isLargeText = false
-    
+    @StateObject private var sessionStore = SessionStore()
+
     var body: some View {
+        
         TabView {
             Tab("Home", systemImage: "house") {
-                Text("Home")
+                DashboardView()
+                    .environmentObject(sessionStore)
             }
             
             Tab("Map", systemImage: "map") {
                 MapScreen()
+                    .environmentObject(sessionStore)
             }
             
             Tab("Live", systemImage: "video") {

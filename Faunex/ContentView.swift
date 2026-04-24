@@ -19,7 +19,7 @@ struct ContentView: View {
             }
             
             Tab("Map", systemImage: "map") {
-                Text("Map")
+                MapScreen()
             }
             
             Tab("Live", systemImage: "video") {

@@ -18,10 +18,12 @@ struct ContentView: View {
         TabView {
             Tab("Home", systemImage: "house") {
                 DashboardView()
+                    .environmentObject(sessionStore)
             }
             
             Tab("Map", systemImage: "map") {
                 MapScreen()
+                    .environmentObject(sessionStore)
             }
             
             Tab("Live", systemImage: "video") {

@@ -7,33 +7,29 @@ struct SavedView: View {
     @Environment(\.modelContext) private var context
     
     var body: some View {
-            NavigationView {
-                List {
-                    ForEach(saved) { fav in
-                        HStack {
-                            
-                            VStack(alignment: .leading) {
-                                Text(fav.name ?? "Unknown Station")
-                                    .font(.headline)
-                                
-                                Text(fav.address ?? "")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                            }
-                            
-                            Spacer()
-                            
-                            Button {
-                                context.delete(fav)
-                            } label: {
-                                Image(systemName: "bookmark.fill")
-                                    .foregroundColor(.blue)
-                            }
-                            .buttonStyle(.plain)
+        NavigationView {
+            List {
+                ForEach(saved) { sav in
+                    
+                    VStack(alignment: .leading) {
+                        Text(sav.name ?? "Unknown Station")
+                            .font(.headline)
+                        
+                        Text(sav.address ?? "")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        
+                        Button(role: .destructive) {
+                            context.delete(sav)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
                         }
                     }
                 }
-                .navigationTitle("Saved Stations")
             }
+            .navigationTitle("Saved Stations")
         }
+    }
 }

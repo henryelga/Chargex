@@ -11,7 +11,7 @@ struct ContentView: View {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
     @AppStorage("isLargeText") private var isLargeText = false
-    @StateObject private var sessionStore = SessionStore()
+    @StateObject private var sessionStore = SessionController()
 
     var body: some View {
         

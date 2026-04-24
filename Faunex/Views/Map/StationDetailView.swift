@@ -2,7 +2,19 @@ import SwiftUI
 
 struct StationDetailView: View {
     
+    @StateObject private var chargingController = ChargingController()
+    
     let station: ChargingStation
+    
+    func formatDuration(_ interval: TimeInterval) -> String {
+        let totalSeconds = Int(interval)
+        
+        let hours = totalSeconds / 3600
+        let minutes = (totalSeconds % 3600) / 60
+        let seconds = totalSeconds % 60
+        
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
     
     var body: some View {
         ScrollView {
@@ -28,30 +40,64 @@ struct StationDetailView: View {
                 
                 VStack(spacing: 12) {
                     
-                    InfoRow(icon: "creditcard", title: "Fee", value: station.fee ?? "Unknown")
-                    InfoRow(icon: "lock.open", title: "Access", value: station.access ?? "Unknown")
-                    InfoRow(icon: "clock", title: "Hours", value: station.openingHours ?? "Not listed")
-                    InfoRow(icon: "square.grid.2x2", title: "Capacity", value: station.capacity ?? "N/A")
+                    InfoRow(icon: "creditcard", title: "Fee", value: (station.fee ?? "Unknown").capitalized)
+                    InfoRow(icon: "lock.open", title: "Access", value: (station.access ?? "Unknown").capitalized)
+                    InfoRow(icon: "clock", title: "Hours", value: (station.openingHours ?? "Not listed").capitalized)
+                    InfoRow(icon: "square.grid.2x2", title: "Capacity", value: (station.capacity ?? "N/A").capitalized)
                     
                     if let type2 = station.type2 {
-                        InfoRow(icon: "bolt.car.fill", title: "Type 2", value: type2)
+                        InfoRow(icon: "bolt.car.fill", title: "Type 2", value: type2.capitalized)
                     }
                     
                     if let chademo = station.chademo {
-                        InfoRow(icon: "bolt.fill", title: "CHAdeMO", value: chademo)
+                        InfoRow(icon: "bolt.fill", title: "CHAdeMO", value: chademo.capitalized)
                     }
                     
                     if let phone = station.phone {
-                        InfoRow(icon: "phone.fill", title: "Phone", value: phone)
+                        InfoRow(icon: "phone.fill", title: "Phone", value: phone.capitalized)
                     }
                     
                     if let address = station.address {
-                        InfoRow(icon: "map.fill", title: "Address", value: address)
+                        InfoRow(icon: "map.fill", title: "Address", value: address.capitalized)
                     }
                 }
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(16)
+                
+                if chargingController.activeSession != nil {
+                    Text("Charging for: \(formatDuration(chargingController.liveDuration))")
+                        .font(.headline)
+                        .foregroundColor(.green)
+                }
+                
+                VStack(spacing: 12) {
+                    
+                    if chargingController.activeSession == nil {
+                        Button {
+                            chargingController.startCharging(stationName: station.name ?? "EV Station")
+                        } label: {
+                            Text("Start Charging")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.green)
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
+                        }
+                    } else {
+                        Button {
+                            chargingController.stopCharging()
+                        } label: {
+                            Text("Stop Charging")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.red)
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
+                        }
+                    }
+                }
+                .padding(.top)
                 
                 Spacer()
             }

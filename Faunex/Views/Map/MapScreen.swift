@@ -3,7 +3,7 @@ import MapKit
 
 struct MapScreen: View {
     
-    @StateObject private var viewModel = MapViewModel()
+    @StateObject private var controller = MapController()
     
     @State private var selectedStation: ChargingStation? = nil
     
@@ -17,7 +17,7 @@ struct MapScreen: View {
     var body: some View {
         Map(position: $position) {
             
-            ForEach(viewModel.stations) { station in
+            ForEach(controller.stations) { station in
                 Annotation(
                     station.name ?? "EV Charger",
                     coordinate: station.coordinate
@@ -44,7 +44,7 @@ struct MapScreen: View {
             }
         }
         .onAppear {
-            viewModel.loadStations()
+            controller.loadStations()
         }
         .sheet(item: $selectedStation) { station in
             StationDetailView(station: station)

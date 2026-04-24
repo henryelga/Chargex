@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-class MapViewModel: ObservableObject {
+class MapController: ObservableObject {
     
     @Published var stations: [ChargingStation] = []
     

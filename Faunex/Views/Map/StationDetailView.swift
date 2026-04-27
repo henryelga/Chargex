@@ -21,8 +21,15 @@ struct StationDetailView: View {
             let newSaved = SavedStation(
                 id: id,
                 name: station.name,
-                address: station.address
-            )
+                address: station.address,
+                operatorName: station.operatorName,
+                fee: station.fee,
+                access: station.access,
+                openingHours: station.openingHours,
+                capacity: station.capacity,
+                phone: station.phone,
+                type2: station.type2,
+                chademo: station.chademo            )
             context.insert(newSaved)
         }
     }

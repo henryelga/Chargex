@@ -1,7 +1,37 @@
 import SwiftUI
+import SwiftData
 
 struct StationDetailView: View {
     
+    @Environment(\.modelContext) private var context
+    @Query private var saved: [SavedStation]
+    
+    let station: ChargingStation
+    
+    private func isSaved(_ station: ChargingStation) -> Bool {
+        saved.contains { $0.id == station.ref }
+    }
+    
+    private func toggleSaved() {
+        guard let id = station.ref else { return }
+        
+        if let existing = saved.first(where: { $0.id == id }) {
+            context.delete(existing)
+        } else {
+            let newSaved = SavedStation(
+                id: id,
+                name: station.name,
+                address: station.address,
+                operatorName: station.operatorName,
+                fee: station.fee,
+                access: station.access,
+                openingHours: station.openingHours,
+                capacity: station.capacity,
+                phone: station.phone,
+                type2: station.type2,
+                chademo: station.chademo            )
+            context.insert(newSaved)
+        }
     @StateObject private var chargingController = ChargingController()
     
     let station: ChargingStation
@@ -35,6 +65,16 @@ struct StationDetailView: View {
                     Label(operatorName, systemImage: "building.2.fill")
                         .foregroundColor(.secondary)
                 }
+                
+                Button {
+                    toggleSaved()
+                } label: {
+                    Label(
+                        isSaved(station) ? "Saved" : "Save",
+                        systemImage: isSaved(station) ? "bookmark.fill" : "bookmark"
+                    )
+                }
+                .buttonStyle(.borderedProminent)
                 
                 Divider()
                 

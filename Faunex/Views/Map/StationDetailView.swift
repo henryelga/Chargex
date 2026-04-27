@@ -1,10 +1,15 @@
 import SwiftUI
 import SwiftData
 
+import SwiftUI
+import SwiftData
+
 struct StationDetailView: View {
     
     @Environment(\.modelContext) private var context
     @Query private var saved: [SavedStation]
+    
+    @StateObject private var chargingController = ChargingController()
     
     let station: ChargingStation
     
@@ -29,12 +34,11 @@ struct StationDetailView: View {
                 capacity: station.capacity,
                 phone: station.phone,
                 type2: station.type2,
-                chademo: station.chademo            )
+                chademo: station.chademo
+            )
             context.insert(newSaved)
         }
-    @StateObject private var chargingController = ChargingController()
-    
-    let station: ChargingStation
+    }
     
     func formatDuration(_ interval: TimeInterval) -> String {
         let totalSeconds = Int(interval)

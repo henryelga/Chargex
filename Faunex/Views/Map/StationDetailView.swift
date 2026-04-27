@@ -21,15 +21,11 @@ struct StationDetailView: View {
             
             VStack(spacing: 16) {
                 
-                Capsule()
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(width: 40, height: 5)
-                    .padding(.top, 8)
-                
                 Text(station.name ?? "EV Charging Station")
                     .font(.title2)
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
+                    .padding(.top, 8)
                 
                 if let operatorName = station.operatorName {
                     Label(operatorName, systemImage: "building.2.fill")

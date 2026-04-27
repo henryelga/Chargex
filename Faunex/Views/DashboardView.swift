@@ -10,7 +10,7 @@ import Charts
 
 struct DashboardView: View {
     
-    @EnvironmentObject var sessionController: SessionController
+    @EnvironmentObject var sessionController: ChargingController
     
     var body: some View {
         ScrollView {

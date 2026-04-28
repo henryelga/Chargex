@@ -1,7 +1,7 @@
 import Foundation
 import CoreLocation
 
-struct ChargingStation: Identifiable {
+struct ChargingStation: Identifiable, Equatable {
     let id = UUID()
     let coordinate: CLLocationCoordinate2D
     
@@ -17,9 +17,17 @@ struct ChargingStation: Identifiable {
     let phone: String?
     
     let type2: String?
+    let type2Combo: String?
     let chademo: String?
     let type2Output: String?
     let chademoOutput: String?
     
+    var voltage: String?
+    var amperage: String?
+    
     let address: String?
+    
+    static func ==(lhs: ChargingStation, rhs: ChargingStation) -> Bool {
+        return lhs.id == rhs.id
+    }
 }

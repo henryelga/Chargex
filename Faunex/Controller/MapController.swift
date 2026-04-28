@@ -1,24 +1,33 @@
 import Foundation
 import Combine
 
+enum SocketType {
+    case none
+    case type2
+    case chademo
+    case type2Combo
+}
+
 class MapController: ObservableObject {
     
     @Published var stations: [ChargingStation] = []
-    
-    @Published var showFreeOnly: Bool = false
-    @Published var requireType2: Bool = false
-    @Published var requireCHAdeMO: Bool = false
-    @Published var requireFast: Bool = false
-    
     @Published var filteredStations: [ChargingStation] = []
     
+    // Filters
+    @Published var showFreeOnly: Bool = false
+    @Published var requireFast: Bool = false
+    @Published var selectedSocketType: SocketType = .none
+    @Published var selectedOperator: String = "Any"
+    
     private let service = OverpassService()
+    
+    private var cancellables = Set<AnyCancellable>()
     
     init() {
         Publishers.CombineLatest4(
             $showFreeOnly,
-            $requireType2,
-            $requireCHAdeMO,
+            $selectedSocketType,
+            $selectedOperator,
             $requireFast
         )
         .sink { [weak self] _, _, _, _ in
@@ -26,8 +35,6 @@ class MapController: ObservableObject {
         }
         .store(in: &cancellables)
     }
-
-    private var cancellables = Set<AnyCancellable>()
     
     func loadStations() {
         service.fetchChargingStations { [weak self] stations in
@@ -40,28 +47,27 @@ class MapController: ObservableObject {
         filteredStations = stations.filter { station in
             
             // FREE FILTER
-            if showFreeOnly {
-                if station.fee?.lowercased() != "no" {
-                    return false
+            if showFreeOnly && station.fee?.lowercased() != "no" {
+                return false
+            }
+            
+            // SOCKET TYPE FILTER
+            if selectedSocketType != .none {
+                switch selectedSocketType {
+                case .type2:
+                    guard let type2 = station.type2, Int(type2) ?? 0 > 0 else { return false }
+                case .chademo:
+                    guard let chademo = station.chademo, Int(chademo) ?? 0 > 0 else { return false }
+                case .type2Combo:
+                    guard let type2Combo = station.type2Combo, Int(type2Combo) ?? 0 > 0 else { return false }
+                case .none:
+                    break
                 }
             }
             
-            // TYPE 2 FILTER
-            if requireType2 {
-                guard let type2 = station.type2,
-                      let value = Int(type2),
-                      value > 0 else {
-                    return false
-                }
-            }
-            
-            // CHAdeMO FILTER
-            if requireCHAdeMO {
-                guard let chademo = station.chademo,
-                      let value = Int(chademo),
-                      value > 0 else {
-                    return false
-                }
+            // OPERATOR FILTER
+            if selectedOperator != "Any", station.operatorName?.lowercased() != selectedOperator.lowercased() {
+                return false
             }
             
             // FAST CHARGER FILTER
@@ -74,5 +80,10 @@ class MapController: ObservableObject {
             
             return true
         }
+    }
+    
+    func getUniqueOperators() -> [String] {
+        let operators = Set(stations.compactMap { $0.operatorName })
+        return ["Any"] + operators.sorted()
     }
 }

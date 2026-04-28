@@ -6,7 +6,7 @@ struct MapScreen: View {
     @StateObject private var controller = MapController()
     
     @State private var selectedStation: ChargingStation? = nil
-    
+    @State private var showFilterSheet: Bool = false
     @State private var position: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 53.1424, longitude: -7.6921),
@@ -15,40 +15,54 @@ struct MapScreen: View {
     )
     
     var body: some View {
-        Map(position: $position) {
-            
-            ForEach(controller.stations) { station in
-                Annotation(
-                    station.name ?? "EV Charger",
-                    coordinate: station.coordinate
-                ) {
-                    Button {
-                        selectedStation = station
-                    } label: {
-                        ZStack {
-                            Circle()
-                                .fill(Color.green.opacity(0.15))
-                                .frame(width: 42, height: 42)
-                            
-                            Circle()
-                                .fill(Color.green)
-                                .frame(width: 28, height: 28)
-                            
-                            Image(systemName: "bolt.fill")
-                                .foregroundColor(.white)
-                                .font(.system(size: 14, weight: .bold))
+        ZStack {
+            Map(position: $position) {
+                ForEach(controller.filteredStations) { station in
+                    Annotation(station.name ?? "EV Charger", coordinate: station.coordinate) {
+                        Button {
+                            selectedStation = station
+                        } label: {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.green.opacity(0.15))
+                                    .frame(width: 42, height: 42)
+                                Circle()
+                                    .fill(Color.green)
+                                    .frame(width: 28, height: 28)
+                                Image(systemName: "bolt.fill")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 14, weight: .bold))
+                            }
+                            .shadow(color: .green.opacity(0.4), radius: 6)
                         }
-                        .shadow(color: .green.opacity(0.4), radius: 6)
                     }
                 }
             }
+            .onAppear {
+                controller.loadStations()
+            }
+            .sheet(item: $selectedStation) { station in
+                StationDetailView(station: station)
+            }
+
+            VStack {
+                HStack {
+                    Spacer()
+                    Button {
+                        showFilterSheet.toggle()
+                    } label: {
+                        Image(systemName: "line.horizontal.3.decrease.circle")
+                            .font(.system(size: 28))
+                            .padding()
+                            .background(.ultraThinMaterial, in: Circle())
+                    }
+                    .padding()
+                }
+                Spacer()
+            }
         }
-        .onAppear {
-            controller.loadStations()
-        }
-        .sheet(item: $selectedStation) { station in
-            StationDetailView(station: station)
+        .sheet(isPresented: $showFilterSheet) {
+            FilterSheet(controller: controller)
         }
     }
 }
-

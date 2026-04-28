@@ -30,6 +30,10 @@ struct ContentView: View {
                 SavedView()
             }
             
+            Tab("Info", systemImage: "book") {
+                InfoView()
+            }
+            
             Tab("Settings", systemImage: "gear") {
                 SettingsScreen()
             }

@@ -10,6 +10,8 @@ struct StationDetailView: View {
     @Query private var saved: [SavedStation]
     
     @StateObject private var chargingController = ChargingController()
+    @AppStorage("notificationsEnabled") private var notificationsEnabled = false
+    @AppStorage("notificationDelay") private var notificationDelay = 10
     
     let station: ChargingStation
     
@@ -116,6 +118,13 @@ struct StationDetailView: View {
                     if chargingController.activeSession == nil {
                         Button {
                             chargingController.startCharging(stationName: station.name ?? "EV Station")
+
+                            if notificationsEnabled {
+                                NotificationManager.shared.scheduleChargingNotification(
+                                    after: notificationDelay,
+                                    stationName: station.name ?? "EV Station"
+                                )
+                            }
                         } label: {
                             Text("Start Charging")
                                 .frame(maxWidth: .infinity)
@@ -127,6 +136,7 @@ struct StationDetailView: View {
                     } else {
                         Button {
                             chargingController.stopCharging()
+                            NotificationManager.shared.cancelChargingNotification()
                         } label: {
                             Text("Stop Charging")
                                 .frame(maxWidth: .infinity)

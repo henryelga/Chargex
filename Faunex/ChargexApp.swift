@@ -7,9 +7,15 @@
 
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 @main
 struct ChargexApp: App {
+    
+    init() {
+        UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

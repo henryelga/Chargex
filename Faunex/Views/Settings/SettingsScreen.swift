@@ -1,11 +1,21 @@
 import SwiftUI
+import UserNotifications
 
 struct SettingsScreen: View {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
     @AppStorage("isLargeText") private var isLargeText = false
     @AppStorage("notificationsEnabled") private var notificationsEnabled = false
-    @AppStorage("notificationDelay") private var notificationDelay = 10
+    @AppStorage("notificationDelay") private var notificationDelay = 20
+    @State private var showPicker = false
+    
+    func requestNotificationPermission(completion: @escaping (Bool) -> Void) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+            DispatchQueue.main.async {
+                completion(granted)
+            }
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -25,14 +35,46 @@ struct SettingsScreen: View {
                 
                 Section(header: Text("Charging Notifications")) {
                                     
-                                    Toggle("Enable Notifications", isOn: $notificationsEnabled)
+                Toggle("Enable Notifications", isOn: $notificationsEnabled)
+                    .onChange(of: notificationsEnabled) { oldValue, newValue in
+                        if newValue {
+                            requestNotificationPermission { granted in
+                                notificationsEnabled = granted
+                            }
+                        }
+                    }
                                     
-                                    if notificationsEnabled {
-                                        Stepper(value: $notificationDelay, in: 1...120) {
-                                            Text("Notify after \(notificationDelay) minutes")
-                                        }
+                    if notificationsEnabled {
+                        
+                        VStack(spacing: 8) {
+                            
+                            Button {
+                                withAnimation {
+                                    showPicker.toggle()
+                                }
+                            } label: {
+                                HStack {
+                                    Text("Notify after")
+                                    
+                                    Spacer()
+                                    
+                                    Text("\(notificationDelay) min")
+                                        .foregroundColor(.gray)
+                                }
+                            }
+                            
+                            if showPicker {
+                                Picker("Minutes", selection: $notificationDelay) {
+                                    ForEach(1...120, id: \.self) { minute in
+                                        Text("\(minute) min").tag(minute)
                                     }
                                 }
+                                .pickerStyle(.wheel)
+                                .frame(height: 150)
+                                .clipped()
+                            }
+                        }
+                    }                }
             }
             .navigationTitle("Settings")
         }

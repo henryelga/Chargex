@@ -26,6 +26,7 @@ extension Color {
     )
     
     static let chargexYellow = Color(hex: "#fff870")
+    static let chargexBlue = Color(hex: "#8cbeff")
 }
 
 extension Color {

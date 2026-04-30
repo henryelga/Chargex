@@ -10,91 +10,98 @@ import SwiftUI
 struct InfoView: View {
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(spacing: 20) {
+        NavigationStack {
+            
+            ZStack {
+                
+                // MARK: - Background
+                LinearGradient(
+                    colors: [
+                        Color.chargexBackground,
+                        Color.chargexBackground.opacity(0.6)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+                
+                ScrollView {
                     
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("How to Use Chargex ⚡️")
-                            .font(.title2)
-                            .bold()
+                    VStack(spacing: 20) {
                         
-                        Text("Quick guide to help you get the most out of the app.")
-                            .foregroundColor(.secondary)
+                        // MARK: - Header
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("How to Use Chargex ⚡️")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.chargexTextPrimary)
+                            
+                            Text("Everything you need to get the most out of your charging experience.")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 10)
+                        
+                        
+                        // MARK: - Cards
+                        InfoCard(
+                            title: "Dashboard",
+                            icon: "chart.bar.fill",
+                            color: .chargexBlue,
+                            content: """
+                            • CO₂ Saved shows your environmental impact.
+                            • Total Charges tracks all sessions.
+                            • Weekly activity shows recent usage.
+                            • Charts visualise your charging habits.
+                            • Stations show where you charge most.
+                            """
+                        )
+                        
+                        InfoCard(
+                            title: "Charging (Map)",
+                            icon: "map.fill",
+                            color: .chargexBlue,
+                            content: """
+                            • Tap a station to view details.
+                            • Start charging to begin tracking.
+                            • Timer runs automatically.
+                            • Get notified when complete.
+                            • Stop charging when finished.
+                            """
+                        )
+                        
+                        InfoCard(
+                            title: "Saved Stations",
+                            icon: "bookmark.fill",
+                            color: .chargexBlue,
+                            content: """
+                            • Save favourite charging locations.
+                            • Tap to view full details.
+                            • Expand for more information.
+                            • Swipe to remove saved stations.
+                            """
+                        )
+                        
+                        InfoCard(
+                            title: "Notifications",
+                            icon: "bell.fill",
+                            color: .chargexBlue,
+                            content: """
+                            • Set charging reminders.
+                            • Choose session duration.
+                            • Get alerts when time is up.
+                            • Prevent overcharging.
+                            """
+                        )
+                        
+                        Spacer(minLength: 30)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    InfoCard(
-                        title: "Dashboard",
-                        icon: "chart.bar.fill",
-                        color: .green,
-                        content: """
-                        • CO₂ Saved shows an estimate of emissions you’ve avoided by charging electric.
-
-                        • Total Charges is how many charging sessions you've completed.
-
-                        • This Week shows how active you’ve been recently.
-
-                        • The chart displays your charging activity across the week.
-
-                        • Most Used Stations shows where you charge most often.
-                        """
-                    )
-                    
-                    InfoCard(
-                        title: "Charging (Map)",
-                        icon: "map.fill",
-                        color: .blue,
-                        content: """
-                        • Tap a station on the map to view details.
-
-                        • Pull up the card to see the Start Charging button.
-                        
-                        • Press Start Charging when you begin charging your car.
-                        
-                        • A timer will start and track how long you've been charging.
-                        
-                        • If notifications are enabled, you’ll get an alert when your selected time is up.
-
-                        • Press Stop Charging when you’re done.
-                        """
-                    )
-                    
-                    InfoCard(
-                        title: "Saved Stations",
-                        icon: "bookmark.fill",
-                        color: .orange,
-                        content: """
-                        • Save stations to quickly access them later.
-
-                        • Tap a saved station to view full details.
-
-                        • Use the toggle to expand and see more information.
-
-                        • Swipe left on a station to delete it from your saved list.
-                        """
-                    )
-                    
-                    InfoCard(
-                        title: "Notifications",
-                        icon: "bell.fill",
-                        color: .purple,
-                        content: """
-                        • Enable notifications in Settings.
-
-                        • Choose how many minutes you want to charge.
-
-                        • You’ll receive one reminder when that time is reached.
-
-                        • This helps prevent overcharging or forgetting your car.
-                        """
-                    )
-                    
-                    Spacer(minLength: 20)
+                    .padding()
                 }
-                .padding()
             }
             .navigationTitle("Info")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
@@ -107,14 +114,20 @@ struct InfoCard: View {
     let content: String
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 14) {
             
-            HStack {
+            HStack(spacing: 12) {
+                
                 Image(systemName: icon)
+                    .font(.system(size: 16, weight: .semibold))
                     .foregroundColor(color)
+                    .frame(width: 38, height: 38)
+                    .background(color.opacity(0.15))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
                 
                 Text(title)
                     .font(.headline)
+                    .foregroundColor(.chargexTextPrimary)
                 
                 Spacer()
             }
@@ -122,13 +135,15 @@ struct InfoCard: View {
             Text(content)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
+                .lineSpacing(5)
         }
-        .padding()
-        .background(color.opacity(0.1))
-        .cornerRadius(16)
+        .padding(16)
+        .background(Color.chargexCard)
+        .cornerRadius(18)
+        .overlay(
+            RoundedRectangle(cornerRadius: 18)
+                .stroke(Color.black.opacity(0.05), lineWidth: 1)
+        )
+        .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 4)
     }
-}
-
-#Preview {
-    InfoView()
 }

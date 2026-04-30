@@ -8,8 +8,6 @@
 		<string>minty</string>
 		<key>UIImageName</key>
 		<string>Image</string>
-		<key>UILaunchScreen</key>
-		<dict/>
 	</dict>
 </dict>
 </plist>

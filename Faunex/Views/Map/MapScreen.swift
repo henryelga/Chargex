@@ -2,16 +2,6 @@ import SwiftUI
 import MapKit
 import Combine
 
-struct EquatableCoordinate: Equatable {
-    let latitude: Double
-    let longitude: Double
-    
-    init(_ coord: CLLocationCoordinate2D) {
-        self.latitude = coord.latitude
-        self.longitude = coord.longitude
-    }
-}
-
 struct MapScreen: View {
     
     @StateObject private var controller = MapController()

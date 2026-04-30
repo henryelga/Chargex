@@ -1,8 +1,7 @@
 import SwiftUI
 import SwiftData
-
-import SwiftUI
-import SwiftData
+import MapKit
+import UIKit
 
 struct StationDetailView: View {
     
@@ -50,6 +49,22 @@ struct StationDetailView: View {
         let seconds = totalSeconds % 60
         
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+
+    func openInAppleMaps() {
+        
+        let coordinate = station.coordinate
+        
+        let placemark = MKPlacemark(coordinate: coordinate)
+        let mapItem = MKMapItem(placemark: placemark)
+        
+        mapItem.name = station.name ?? "Charging Station"
+        
+        let options = [
+            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
+        ]
+        
+        mapItem.openInMaps(launchOptions: options)
     }
     
     var body: some View {
@@ -148,6 +163,17 @@ struct StationDetailView: View {
                     }
                 }
                 .padding(.top)
+                
+                Button {
+                    openInAppleMaps()
+                } label: {
+                    Text("Get Directions")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                }
                 
                 Spacer()
             }

@@ -1,9 +1,12 @@
 import SwiftUI
 import MapKit
+import Combine
 
 struct MapScreen: View {
     
     @StateObject private var controller = MapController()
+    @StateObject private var locationManager = LocationManager()
+    @State private var hasCentered = false
     
     @State private var selectedStation: ChargingStation? = nil
     @State private var showFilterSheet: Bool = false
@@ -14,9 +17,35 @@ struct MapScreen: View {
         )
     )
     
+    func updateMapPosition(force: Bool = false) {
+        guard let coord = locationManager.userLocation else { return }
+        
+        if hasCentered && !force { return }
+        
+        hasCentered = true
+        
+        withAnimation {
+            position = .region(
+                MKCoordinateRegion(
+                    center: coord,
+                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                )
+            )
+        }
+    }
+    
     var body: some View {
         ZStack {
             Map(position: $position) {
+                
+                if let userLocation = locationManager.userLocation {
+                    Annotation("You", coordinate: userLocation) {
+                        Circle()
+                            .fill(Color.blue)
+                            .frame(width: 16, height: 16)
+                    }
+                }
+                
                 ForEach(controller.filteredStations) { station in
                     Annotation(station.name ?? "EV Charger", coordinate: station.coordinate) {
                         Button {
@@ -40,6 +69,17 @@ struct MapScreen: View {
             }
             .onAppear {
                 controller.loadStations()
+                locationManager.requestPermission()
+            }
+            .onChange(of: locationManager.userLocation?.latitude) { _ in
+                updateMapPosition()
+            }
+
+            .onChange(of: locationManager.userLocation?.longitude) { _ in
+                updateMapPosition()
+            }
+            .onReceive(locationManager.$userLocation) { _ in
+                updateMapPosition()
             }
             .sheet(item: $selectedStation) { station in
                 StationDetailView(station: station)
@@ -59,6 +99,25 @@ struct MapScreen: View {
                     .padding()
                 }
                 Spacer()
+            }
+            
+            VStack {
+                Spacer()
+                
+                HStack {
+                    Spacer()
+                    
+                    Button {
+                        locationManager.handleLocationButtonTap()
+                        updateMapPosition(force: true)
+                    } label: {
+                        Image(systemName: "location.fill")
+                            .font(.system(size: 20))
+                            .padding()
+                            .background(.ultraThinMaterial, in: Circle())
+                    }
+                    .padding()
+                }
             }
         }
         .sheet(isPresented: $showFilterSheet) {

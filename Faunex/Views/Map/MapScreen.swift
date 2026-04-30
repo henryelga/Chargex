@@ -27,8 +27,10 @@ struct MapScreen: View {
         )
     )
     
-    func updateMapPosition() {
-        guard let coord = locationManager.userLocation, !hasCentered else { return }
+    func updateMapPosition(force: Bool = false) {
+        guard let coord = locationManager.userLocation else { return }
+        
+        if hasCentered && !force { return }
         
         hasCentered = true
         
@@ -107,6 +109,25 @@ struct MapScreen: View {
                     .padding()
                 }
                 Spacer()
+            }
+            
+            VStack {
+                Spacer()
+                
+                HStack {
+                    Spacer()
+                    
+                    Button {
+                        locationManager.handleLocationButtonTap()
+                        updateMapPosition(force: true)
+                    } label: {
+                        Image(systemName: "location.fill")
+                            .font(.system(size: 20))
+                            .padding()
+                            .background(.ultraThinMaterial, in: Circle())
+                    }
+                    .padding()
+                }
             }
         }
         .sheet(isPresented: $showFilterSheet) {

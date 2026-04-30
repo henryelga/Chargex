@@ -49,6 +49,25 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    func handleLocationButtonTap() {
+        switch manager.authorizationStatus {
+            
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+            
+        case .authorizedWhenInUse, .authorizedAlways:
+            manager.startUpdatingLocation()
+            
+        case .denied, .restricted:
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url)
+            }
+            
+        @unknown default:
+            break
+        }
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         userLocation = location.coordinate

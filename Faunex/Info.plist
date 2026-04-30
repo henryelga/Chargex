@@ -11,5 +11,7 @@
 		<key>UILaunchScreen</key>
 		<dict/>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We use your location to show nearby EV charging stations. </string>
 </dict>
 </plist>

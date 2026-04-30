@@ -18,69 +18,96 @@ struct SettingsScreen: View {
     }
     
     var body: some View {
-        NavigationView {
-            Form {
+        NavigationStack {
+            ScrollView {
                 
-                Section(header: Text("Appearance")) {
-                    Toggle("Dark Mode", isOn: $isDarkMode)
-                }
-                
-                Section(header: Text("Text Size")) {
-                    Picker("Font Size", selection: $isLargeText) {
-                        Text("Regular").tag(false)
-                        Text("Large").tag(true)
+                VStack(spacing: 16) {
+                    
+                    // MARK: - Appearance
+                    settingsCard(title: "Appearance") {
+                        Toggle("Dark Mode", isOn: $isDarkMode)
+                            .tint(.chargexPrimary)
                     }
-                    .pickerStyle(SegmentedPickerStyle())
-                }
-                
-                Section(header: Text("Charging Notifications")) {
-                                    
-                Toggle("Enable Notifications", isOn: $notificationsEnabled)
-                    .onChange(of: notificationsEnabled) { oldValue, newValue in
-                        if newValue {
-                            requestNotificationPermission { granted in
-                                notificationsEnabled = granted
-                            }
+                    
+                    // MARK: - Text Size
+                    settingsCard(title: "Text Size") {
+                        Picker("Font Size", selection: $isLargeText) {
+                            Text("Regular").tag(false)
+                            Text("Large").tag(true)
                         }
+                        .pickerStyle(.segmented)
                     }
-                                    
-                    if notificationsEnabled {
+                    
+                    // MARK: - Notifications
+                    settingsCard(title: "Charging Notifications") {
                         
-                        VStack(spacing: 8) {
-                            
-                            Button {
-                                withAnimation {
-                                    showPicker.toggle()
-                                }
-                            } label: {
-                                HStack {
-                                    Text("Notify after")
-                                    
-                                    Spacer()
-                                    
-                                    Text("\(notificationDelay) min")
-                                        .foregroundColor(.gray)
-                                }
-                            }
-                            
-                            if showPicker {
-                                Picker("Minutes", selection: $notificationDelay) {
-                                    ForEach(1...120, id: \.self) { minute in
-                                        Text("\(minute) min").tag(minute)
+                        Toggle("Enable Notifications", isOn: $notificationsEnabled)
+                            .tint(.chargexPrimary)
+                            .onChange(of: notificationsEnabled) { _, newValue in
+                                if newValue {
+                                    requestNotificationPermission { granted in
+                                        notificationsEnabled = granted
                                     }
                                 }
-                                .pickerStyle(.wheel)
-                                .frame(height: 150)
-                                .clipped()
                             }
+                        
+                        if notificationsEnabled {
+                            VStack(alignment: .leading, spacing: 12) {
+                                
+                                Button {
+                                    withAnimation {
+                                        showPicker.toggle()
+                                    }
+                                } label: {
+                                    HStack {
+                                        Text("Notify after")
+                                            .foregroundColor(.primary)
+                                        
+                                        Spacer()
+                                        
+                                        Text("\(notificationDelay) min")
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                                
+                                if showPicker {
+                                    Picker("Minutes", selection: $notificationDelay) {
+                                        ForEach(1...120, id: \.self) { minute in
+                                            Text("\(minute) min").tag(minute)
+                                        }
+                                    }
+                                    .pickerStyle(.wheel)
+                                    .frame(height: 140)
+                                    .clipped()
+                                }
+                            }
+                            .transition(.opacity)
                         }
-                    }                }
+                    }
+                }
+                .padding()
             }
+            .background(Color.chargexBackground)
             .navigationTitle("Settings")
         }
     }
-}
-
-#Preview {
-    SettingsScreen()
+    
+    // MARK: - Reusable Card
+    private func settingsCard<Content: View>(
+        title: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            
+            Text(title)
+                .font(.headline)
+                .foregroundColor(.chargexTextPrimary)
+            
+            content()
+        }
+        .padding()
+        .background(Color.chargexCard)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .shadow(color: .black.opacity(0.05), radius: 6, x: 0, y: 2)
+    }
 }

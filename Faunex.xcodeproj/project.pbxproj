@@ -29,9 +29,22 @@
 		3FB8443E2F6D749600486125 /* FaunexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FaunexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3FFB140A2FA3A0D400BE6909 /* Exceptions for "Faunex" folder in "Faunex" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3FB844262F6D749400486125 /* Faunex */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3FB844292F6D749400486125 /* Faunex */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3FFB140A2FA3A0D400BE6909 /* Exceptions for "Faunex" folder in "Faunex" target */,
+			);
 			path = Faunex;
 			sourceTree = "<group>";
 		};

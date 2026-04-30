@@ -1,9 +1,22 @@
 import SwiftUI
 import MapKit
+import Combine
+
+struct EquatableCoordinate: Equatable {
+    let latitude: Double
+    let longitude: Double
+    
+    init(_ coord: CLLocationCoordinate2D) {
+        self.latitude = coord.latitude
+        self.longitude = coord.longitude
+    }
+}
 
 struct MapScreen: View {
     
     @StateObject private var controller = MapController()
+    @StateObject private var locationManager = LocationManager()
+    @State private var hasCentered = false
     
     @State private var selectedStation: ChargingStation? = nil
     @State private var showFilterSheet: Bool = false
@@ -14,9 +27,33 @@ struct MapScreen: View {
         )
     )
     
+    func updateMapPosition() {
+        guard let coord = locationManager.userLocation, !hasCentered else { return }
+        
+        hasCentered = true
+        
+        withAnimation {
+            position = .region(
+                MKCoordinateRegion(
+                    center: coord,
+                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                )
+            )
+        }
+    }
+    
     var body: some View {
         ZStack {
             Map(position: $position) {
+                
+                if let userLocation = locationManager.userLocation {
+                    Annotation("You", coordinate: userLocation) {
+                        Circle()
+                            .fill(Color.blue)
+                            .frame(width: 16, height: 16)
+                    }
+                }
+                
                 ForEach(controller.filteredStations) { station in
                     Annotation(station.name ?? "EV Charger", coordinate: station.coordinate) {
                         Button {
@@ -40,6 +77,17 @@ struct MapScreen: View {
             }
             .onAppear {
                 controller.loadStations()
+                locationManager.requestPermission()
+            }
+            .onChange(of: locationManager.userLocation?.latitude) { _ in
+                updateMapPosition()
+            }
+
+            .onChange(of: locationManager.userLocation?.longitude) { _ in
+                updateMapPosition()
+            }
+            .onReceive(locationManager.$userLocation) { _ in
+                updateMapPosition()
             }
             .sheet(item: $selectedStation) { station in
                 StationDetailView(station: station)

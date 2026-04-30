@@ -16,30 +16,37 @@ struct ContentView: View {
     var body: some View {
         
         TabView {
-            Tab("Home", systemImage: "house") {
+            Tab("Home", systemImage: "house.fill") {
                 DashboardView()
                     .environmentObject(sessionStore)
             }
             
-            Tab("Map", systemImage: "map") {
+            Tab("Map", systemImage: "map.fill") {
                 MapScreen()
                     .environmentObject(sessionStore)
             }
             
-            Tab("Saved", systemImage: "bookmark") {
+            Tab("Saved", systemImage: "bookmark.fill") {
                 SavedView()
             }
             
-            Tab("Info", systemImage: "book") {
+            Tab("Info", systemImage: "book.fill") {
                 InfoView()
             }
             
-            Tab("Settings", systemImage: "gear") {
+            Tab("Settings", systemImage: "gearshape.fill") {
                 SettingsScreen()
             }
         }
         .preferredColorScheme(isDarkMode ? .dark : .light)
         .dynamicTypeSize(isLargeText ? .xLarge : .medium)
+        .toolbarBackground(
+            Material.ultraThinMaterial,
+            for: .tabBar
+        )
+        .toolbarBackground(.visible, for: .tabBar)
+        .tabViewStyle(.automatic)
+        
     }
 }
 

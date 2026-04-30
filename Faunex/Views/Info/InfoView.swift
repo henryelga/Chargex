@@ -31,7 +31,7 @@ struct InfoView: View {
                         
                         // MARK: - Header
                         VStack(alignment: .leading, spacing: 6) {
-                            Text("How to Use Chargex ⚡️")
+                            Text("How to Use Chargex")
                                 .font(.title2)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.chargexTextPrimary)

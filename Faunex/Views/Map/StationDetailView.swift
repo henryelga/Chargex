@@ -43,46 +43,40 @@ struct StationDetailView: View {
     
     func formatDuration(_ interval: TimeInterval) -> String {
         let totalSeconds = Int(interval)
-        
         let hours = totalSeconds / 3600
         let minutes = (totalSeconds % 3600) / 60
         let seconds = totalSeconds % 60
-        
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 
     func openInAppleMaps() {
-        
         let coordinate = station.coordinate
-        
         let placemark = MKPlacemark(coordinate: coordinate)
         let mapItem = MKMapItem(placemark: placemark)
-        
         mapItem.name = station.name ?? "Charging Station"
-        
-        let options = [
-            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
-        ]
-        
-        mapItem.openInMaps(launchOptions: options)
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
     }
     
     var body: some View {
         ScrollView {
-            
-            VStack(spacing: 16) {
+            VStack(spacing: 20) {
                 
-                Text(station.name ?? "EV Charging Station")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 8)
-                
-                if let operatorName = station.operatorName {
-                    Label(operatorName, systemImage: "building.2.fill")
-                        .foregroundColor(.secondary)
+                // MARK: - Header
+                VStack(spacing: 4) {
+                    Text(station.name ?? "EV Charging Station")
+                        .font(.title2.weight(.semibold))
+                        .foregroundColor(Color.chargexTextPrimary)
+                        .multilineTextAlignment(.center)
+                    
+                    if let operatorName = station.operatorName {
+                        Label(operatorName, systemImage: "building.2.fill")
+                            .foregroundColor(.secondary)
+                            .font(.subheadline)
+                    }
                 }
+                .padding(.top, 12)
                 
+                // MARK: - Save Button
                 Button {
                     toggleSaved()
                 } label: {
@@ -90,13 +84,15 @@ struct StationDetailView: View {
                         isSaved(station) ? "Saved" : "Save",
                         systemImage: isSaved(station) ? "bookmark.fill" : "bookmark"
                     )
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(Color.chargexPrimary)
+                    .foregroundColor(.black) // <- always dark text
+                    .clipShape(Capsule())
                 }
-                .buttonStyle(.borderedProminent)
                 
-                Divider()
-                
+                // MARK: - Info Card
                 VStack(spacing: 12) {
-                    
                     InfoRow(icon: "creditcard", title: "Fee", value: (station.fee ?? "Unknown").capitalized)
                     InfoRow(icon: "lock.open", title: "Access", value: (station.access ?? "Unknown").capitalized)
                     InfoRow(icon: "clock", title: "Hours", value: (station.openingHours ?? "Not listed").capitalized)
@@ -119,21 +115,23 @@ struct StationDetailView: View {
                     }
                 }
                 .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(16)
+                .background(Color.chargexCard)
+                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
                 
+                // MARK: - Charging Session
                 if chargingController.activeSession != nil {
                     Text("Charging for: \(formatDuration(chargingController.liveDuration))")
                         .font(.headline)
                         .foregroundColor(.green)
+                        .padding(.top, 4)
                 }
                 
+                // MARK: - Start / Stop Charging
                 VStack(spacing: 12) {
-                    
                     if chargingController.activeSession == nil {
                         Button {
                             chargingController.startCharging(stationName: station.name ?? "EV Station")
-
                             if notificationsEnabled {
                                 NotificationManager.shared.scheduleChargingNotification(
                                     after: notificationDelay,
@@ -144,9 +142,9 @@ struct StationDetailView: View {
                             Text("Start Charging")
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.green)
-                                .foregroundColor(.white)
-                                .cornerRadius(12)
+                                .background(Color.chargexPrimary)
+                                .foregroundColor(.black) // <- always dark text
+                                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                         }
                     } else {
                         Button {
@@ -157,28 +155,29 @@ struct StationDetailView: View {
                                 .frame(maxWidth: .infinity)
                                 .padding()
                                 .background(Color.red)
-                                .foregroundColor(.white)
-                                .cornerRadius(12)
+                                .foregroundColor(.black) // <- dark text even on red
+                                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                         }
                     }
                 }
-                .padding(.top)
                 
+                // MARK: - Directions Button
                 Button {
                     openInAppleMaps()
                 } label: {
                     Text("Get Directions")
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
+                        .background(Color.chargexBlue)
+                        .foregroundColor(.black) // <- always dark text
+                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                 }
                 
-                Spacer()
+                Spacer(minLength: 20)
             }
             .padding()
         }
+        .background(Color.chargexBackground.ignoresSafeArea())
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
     }

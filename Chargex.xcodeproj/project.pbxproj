@@ -24,38 +24,38 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3FB844272F6D749400486125 /* Faunex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Faunex.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3FB844342F6D749600486125 /* FaunexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FaunexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3FB8443E2F6D749600486125 /* FaunexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FaunexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FB844272F6D749400486125 /* Chargex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chargex.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FB844342F6D749600486125 /* ChargexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChargexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FB8443E2F6D749600486125 /* ChargexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChargexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		3FFB14492FA3A1F100BE6909 /* Exceptions for "Faunex" folder in "Faunex" target */ = {
+		3FFB14492FA3A1F100BE6909 /* Exceptions for "Chargex" folder in "Chargex" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 3FB844262F6D749400486125 /* Faunex */;
+			target = 3FB844262F6D749400486125 /* Chargex */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		3FB844292F6D749400486125 /* Faunex */ = {
+		3FB844292F6D749400486125 /* Chargex */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				3FFB14492FA3A1F100BE6909 /* Exceptions for "Faunex" folder in "Faunex" target */,
+				3FFB14492FA3A1F100BE6909 /* Exceptions for "Chargex" folder in "Chargex" target */,
 			);
-			path = Faunex;
+			path = Chargex;
 			sourceTree = "<group>";
 		};
-		3FB844372F6D749600486125 /* FaunexTests */ = {
+		3FB844372F6D749600486125 /* ChargexTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = FaunexTests;
+			path = ChargexTests;
 			sourceTree = "<group>";
 		};
-		3FB844412F6D749600486125 /* FaunexUITests */ = {
+		3FB844412F6D749600486125 /* ChargexUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = FaunexUITests;
+			path = ChargexUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -88,9 +88,9 @@
 		3FB8441E2F6D749400486125 = {
 			isa = PBXGroup;
 			children = (
-				3FB844292F6D749400486125 /* Faunex */,
-				3FB844372F6D749600486125 /* FaunexTests */,
-				3FB844412F6D749600486125 /* FaunexUITests */,
+				3FB844292F6D749400486125 /* Chargex */,
+				3FB844372F6D749600486125 /* ChargexTests */,
+				3FB844412F6D749600486125 /* ChargexUITests */,
 				3FB844282F6D749400486125 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,9 +98,9 @@
 		3FB844282F6D749400486125 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3FB844272F6D749400486125 /* Faunex.app */,
-				3FB844342F6D749600486125 /* FaunexTests.xctest */,
-				3FB8443E2F6D749600486125 /* FaunexUITests.xctest */,
+				3FB844272F6D749400486125 /* Chargex.app */,
+				3FB844342F6D749600486125 /* ChargexTests.xctest */,
+				3FB8443E2F6D749600486125 /* ChargexUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,9 +108,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3FB844262F6D749400486125 /* Faunex */ = {
+		3FB844262F6D749400486125 /* Chargex */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3FB844482F6D749600486125 /* Build configuration list for PBXNativeTarget "Faunex" */;
+			buildConfigurationList = 3FB844482F6D749600486125 /* Build configuration list for PBXNativeTarget "Chargex" */;
 			buildPhases = (
 				3FB844232F6D749400486125 /* Sources */,
 				3FB844242F6D749400486125 /* Frameworks */,
@@ -121,18 +121,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				3FB844292F6D749400486125 /* Faunex */,
+				3FB844292F6D749400486125 /* Chargex */,
 			);
-			name = Faunex;
+			name = Chargex;
 			packageProductDependencies = (
 			);
 			productName = Faunex;
-			productReference = 3FB844272F6D749400486125 /* Faunex.app */;
+			productReference = 3FB844272F6D749400486125 /* Chargex.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3FB844332F6D749600486125 /* FaunexTests */ = {
+		3FB844332F6D749600486125 /* ChargexTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3FB8444B2F6D749600486125 /* Build configuration list for PBXNativeTarget "FaunexTests" */;
+			buildConfigurationList = 3FB8444B2F6D749600486125 /* Build configuration list for PBXNativeTarget "ChargexTests" */;
 			buildPhases = (
 				3FB844302F6D749600486125 /* Sources */,
 				3FB844312F6D749600486125 /* Frameworks */,
@@ -144,18 +144,18 @@
 				3FB844362F6D749600486125 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				3FB844372F6D749600486125 /* FaunexTests */,
+				3FB844372F6D749600486125 /* ChargexTests */,
 			);
-			name = FaunexTests;
+			name = ChargexTests;
 			packageProductDependencies = (
 			);
 			productName = FaunexTests;
-			productReference = 3FB844342F6D749600486125 /* FaunexTests.xctest */;
+			productReference = 3FB844342F6D749600486125 /* ChargexTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		3FB8443D2F6D749600486125 /* FaunexUITests */ = {
+		3FB8443D2F6D749600486125 /* ChargexUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3FB8444E2F6D749600486125 /* Build configuration list for PBXNativeTarget "FaunexUITests" */;
+			buildConfigurationList = 3FB8444E2F6D749600486125 /* Build configuration list for PBXNativeTarget "ChargexUITests" */;
 			buildPhases = (
 				3FB8443A2F6D749600486125 /* Sources */,
 				3FB8443B2F6D749600486125 /* Frameworks */,
@@ -167,13 +167,13 @@
 				3FB844402F6D749600486125 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				3FB844412F6D749600486125 /* FaunexUITests */,
+				3FB844412F6D749600486125 /* ChargexUITests */,
 			);
-			name = FaunexUITests;
+			name = ChargexUITests;
 			packageProductDependencies = (
 			);
 			productName = FaunexUITests;
-			productReference = 3FB8443E2F6D749600486125 /* FaunexUITests.xctest */;
+			productReference = 3FB8443E2F6D749600486125 /* ChargexUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -199,7 +199,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3FB844222F6D749400486125 /* Build configuration list for PBXProject "Faunex" */;
+			buildConfigurationList = 3FB844222F6D749400486125 /* Build configuration list for PBXProject "Chargex" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -213,9 +213,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3FB844262F6D749400486125 /* Faunex */,
-				3FB844332F6D749600486125 /* FaunexTests */,
-				3FB8443D2F6D749600486125 /* FaunexUITests */,
+				3FB844262F6D749400486125 /* Chargex */,
+				3FB844332F6D749600486125 /* ChargexTests */,
+				3FB8443D2F6D749600486125 /* ChargexUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -271,12 +271,12 @@
 /* Begin PBXTargetDependency section */
 		3FB844362F6D749600486125 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3FB844262F6D749400486125 /* Faunex */;
+			target = 3FB844262F6D749400486125 /* Chargex */;
 			targetProxy = 3FB844352F6D749600486125 /* PBXContainerItemProxy */;
 		};
 		3FB844402F6D749600486125 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3FB844262F6D749400486125 /* Faunex */;
+			target = 3FB844262F6D749400486125 /* Chargex */;
 			targetProxy = 3FB8443F2F6D749600486125 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -421,7 +421,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.elga.Faunex;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Chargex;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -451,7 +451,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.elga.Faunex;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Chargex;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -479,7 +479,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Faunex.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Faunex";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chargex.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Chargex";
 			};
 			name = Debug;
 		};
@@ -500,7 +500,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Faunex.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Faunex";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chargex.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Chargex";
 			};
 			name = Release;
 		};
@@ -545,7 +545,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3FB844222F6D749400486125 /* Build configuration list for PBXProject "Faunex" */ = {
+		3FB844222F6D749400486125 /* Build configuration list for PBXProject "Chargex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3FB844462F6D749600486125 /* Debug */,
@@ -554,7 +554,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3FB844482F6D749600486125 /* Build configuration list for PBXNativeTarget "Faunex" */ = {
+		3FB844482F6D749600486125 /* Build configuration list for PBXNativeTarget "Chargex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3FB844492F6D749600486125 /* Debug */,
@@ -563,7 +563,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3FB8444B2F6D749600486125 /* Build configuration list for PBXNativeTarget "FaunexTests" */ = {
+		3FB8444B2F6D749600486125 /* Build configuration list for PBXNativeTarget "ChargexTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3FB8444C2F6D749600486125 /* Debug */,
@@ -572,7 +572,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3FB8444E2F6D749600486125 /* Build configuration list for PBXNativeTarget "FaunexUITests" */ = {
+		3FB8444E2F6D749600486125 /* Build configuration list for PBXNativeTarget "ChargexUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3FB8444F2F6D749600486125 /* Debug */,

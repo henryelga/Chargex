@@ -9,7 +9,7 @@ struct FilterSheet: View {
             Form {
                 // Price Filter
                 Section("Price") {
-                    Toggle("Free Only", isOn: $controller.showFreeOnly)
+                    Toggle("No-cost Only", isOn: $controller.showFreeOnly)
                 }
                 
                 // Socket Type Filter

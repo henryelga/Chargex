@@ -124,7 +124,7 @@ struct DetailRow: View {
                 
                 Spacer()
                 
-                Text(value)
+                Text(value.capitalized)
                     .font(.caption)
                     .foregroundColor(.chargexTextPrimary)
                     .multilineTextAlignment(.trailing)

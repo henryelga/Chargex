@@ -48,7 +48,7 @@ struct InfoView: View {
                         InfoCard(
                             title: "Dashboard",
                             icon: "chart.bar.fill",
-                            color: .chargexBlue,
+                            color: .blue,
                             content: """
                             • CO₂ Saved shows your environmental impact.
                             • Total Charges tracks all sessions.
@@ -57,11 +57,11 @@ struct InfoView: View {
                             • Stations show where you charge most.
                             """
                         )
-                        
+
                         InfoCard(
                             title: "Charging (Map)",
                             icon: "map.fill",
-                            color: .chargexBlue,
+                            color: .green,
                             content: """
                             • Tap a station to view details.
                             • Start charging to begin tracking.
@@ -70,11 +70,11 @@ struct InfoView: View {
                             • Stop charging when finished.
                             """
                         )
-                        
+
                         InfoCard(
                             title: "Saved Stations",
                             icon: "bookmark.fill",
-                            color: .chargexBlue,
+                            color: .orange,
                             content: """
                             • Save favourite charging locations.
                             • Tap to view full details.
@@ -82,11 +82,11 @@ struct InfoView: View {
                             • Swipe to remove saved stations.
                             """
                         )
-                        
+
                         InfoCard(
                             title: "Notifications",
                             icon: "bell.fill",
-                            color: .chargexBlue,
+                            color: .purple,
                             content: """
                             • Set charging reminders.
                             • Choose session duration.
